@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI SOC Dashboard</title>
+    <style>
+        body {
+            background-color: #0f172a;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+        .card {
+            background-color: #1e293b;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        .high {
+            border-left: 6px solid red;
+        }
+        .medium {
+            border-left: 6px solid orange;
+        }
+        .badge {
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #334155;
+        }
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI-Assisted SOC Dashboard</h1>
+
+        {% for alert in alerts %}
+        <div class="card {{ alert.severity|lower }}">
+            <h2>{{ alert.process }}</h2>
+            <p><span class="badge">Severity: {{ alert.severity }}</span></p>
+            <p>Risk Score: {{ alert.risk_score }}/10</p>
+            <p>Destination IP: {{ alert.destination_ip }}</p>
+            <p>MITRE Techniques: {{ alert.mitre_techniques }}</p>
+
+            <h3>AI Analysis</h3>
+            <pre>{{ alert.ai_analysis }}</pre>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
